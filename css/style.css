@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
+.container-card {
+    margin-bottom: 6rem;
+}
+.todo-card {
+    display: flex;
+    flex-direction: column;
+    gap:4.5rem;
+    max-width:31rem;
+    margin:1rem;
+    border: .1rem solid;
+    font-size:1.7rem;
+    padding:1rem;
+}
+
+.header-card {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.footer-card {
+    display: flex;
+    justify-content: space-between;
+}
+.btn-tarefa {
+    position: fixed;
+    bottom:2rem;
+    right:1rem;
+}
+
+.modal {
+    display:none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color:aqua;
+    animation-name: entrada;
+}
+.modal-ativo {
+    display:block;
+}
+
