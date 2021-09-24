@@ -50,3 +50,10 @@ html {
 #form {
     font-size:1.6rem;
 }
+
+.completado {
+    color:rgb(78, 231, 72);
+}
+.nao-completado {
+    color: rgb(214, 56, 56);
+}
