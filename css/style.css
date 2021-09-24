@@ -47,4 +47,6 @@ html {
 .modal-ativo {
     display:block;
 }
-
+#form {
+    font-size:1.6rem;
+}
