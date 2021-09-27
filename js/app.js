@@ -1,48 +1,207 @@
-let btn = document.getElementById('btn-criar');
-let containerCard = document.querySelector('.container-card');
-function checkIfComplete(tarefa) {
-    if(tarefa) {
+// Seletores
+const todoInput = document.querySelector('.todo-input');
+const todoButton = document.querySelector('.todo-button')
+const todoContainer = document.querySelector('.todo-container');
+const todoList = document.querySelector('.todo-list');
+const todoDescricao = document.getElementById('todoDescricao')
+const todoData = document.getElementById('todoData')
+const todoDataFinal = document.getElementById('todoDataFinal')
+/* const filterOption = document.querySelector('.filter-todo'); */
 
-        return "<h3 class='completado'>completado</h3>";
-    }else {
-        return "<h3 class='nao-completado'>não completado</h3>";
-    }
+//Event Listeners
+document.addEventListener('DOMContentLoaded', getLocalTodo)
+todoButton.addEventListener("click", addTodo);
+todoList.addEventListener('click', deleteCheck);
+
+/* filterOption.addEventListener('click', filterTodo) */
+
+// Funções
+function addTodo(event) {
+    // Previnindo o form de submeter
+    event.preventDefault();
+    
+    // Criando a div do toDo
+    const todoDiv = document.createElement('div');
+    todoDiv.classList.add('todo');
+    
+    //Criando  a li, informações do toDo
+    // Todo Titulo
+    const newTodo = document.createElement('li');
+    newTodo.innerHTML = todoInput.value
+    newTodo.classList.add('todo-item');
+    
+    //Todo Descriçao
+    const newTodoDescricao = document.createElement('p')
+    newTodoDescricao.innerHTML = todoDescricao.value
+    newTodoDescricao.classList.add('todo-descricao');
+    
+    //Todo Data
+    const newTodoData = document.createElement('p')
+    let today = new Date(); 
+    newTodoData.innerHTML = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); 
+    const newTodoDataFInal = document.createElement('p')
+    newTodoDataFInal.innerHTML = todoDataFinal.value
+    newTodoData.classList.add('todo-data');
+    newTodoDataFInal.classList.add('todo-data-final');
+    
+    // Adicionando a DIV
+    todoDiv.appendChild(newTodo);
+    todoDiv.appendChild(newTodoDescricao);
+    todoDiv.appendChild(newTodoData);
+    todoDiv.appendChild(newTodoDataFInal);
+   
+    // Add todo ao LocalStorage
+    salvarTodos(todoInput.value, todoDescricao.value)
+
+    //Button checado
+    const completedButton =  document.createElement('button');
+    completedButton.innerText = 'OK'
+    completedButton.classList.add('complete-btn')
+    todoDiv.appendChild(completedButton);
+
+    //Button delete
+    const deleteButton =  document.createElement('button');
+    deleteButton.innerText = 'X'
+    deleteButton.classList.add('delete-btn')
+    todoDiv.appendChild(deleteButton);
+
+    //Populando html estático - ul
+    todoList.appendChild(todoDiv);
+
+    // Limpando o input
+    todoInput.value = "";
+    todoDescricao.value = '';
 }
-function cardFactory(id,completed,title) {
-    let card = 
-    `
-    <div class="todo-card">
-        <div class="header-card">
-            <span>${id}</span>
-            ${checkIfComplete(completed)}
-            <span>excluir</span>
-        </div>
-        <p class="main-card">
-        ${title}
-        </p>
-        <div class="footer-card">
-            <div><h4>CRIADO EM</h4><span>01/01/21</span></div>
-            <div><h4>DATA LIMITE</h4><span>05/01/21</span></div>
-        </div>
-    </div>
-    `
-    return card;
-}
-btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    const options = {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'default'
+
+// função para validar
+
+
+// Função para deletar
+function deleteCheck(e){
+    const item = e.target;
+
+    // Delete
+    if(item.classList[0] === "delete-btn"){
+        const todo = item.parentElement;
+        
+        //Animação
+        todo.classList.add('fall')
+        removeLocalTodo(todo);
+        todo.addEventListener('transitionend', () => {
+            todo.remove();
+        })
+        
     }
-    fetch(`https://jsonplaceholder.typicode.com/todos/`, options)
-        .then(response => {
-            response.json()
-            .then (dados => {
-                for(dado of dados) {
-                    let card = cardFactory(dado.id,dado.completed,dado.title);
-                    containerCard.innerHTML += card;
+
+    // Marca 
+    if(item.classList[0] === "complete-btn"){
+        const todo = item.parentElement;
+        todo.classList.toggle('completed');
+    }
+
+}
+
+/* // FIltro
+function filterTodo(e){
+    const todos = todoList.childNodes;
+    todos.forEach(function(todo) {
+        switch(e.target.value){
+            case 'todos':
+                todo.style.display = 'flex  '
+                break;
+            case 'completos':
+                if(todo.classList.contains('completed')){
+                    todo.style.display = 'flex'
+                }else{
+                    todo.style.display = 'none'
                 }
-            })
-        })  
-})
+        }
+    })
+} */
+
+// Salvar todos
+function salvarTodos(todo){
+    let todos; // Primeiro verifica se já temos todos
+    if(localStorage.getItem('todos') === null){ // Se não tivermos, cria uma array vazio
+        todos = []; 
+    }else{
+        todos = JSON.parse(localStorage.getItem('todos'));
+    }   // Se tivervmos vamos add
+    todos.push(todo);
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+function getLocalTodo(todo){
+    let todos; 
+    if(localStorage.getItem('todos') === null){ 
+        todos = []; 
+    }else{
+        todos = JSON.parse(localStorage.getItem('todos'));
+    }  
+
+    for (const todo of todos) {
+        // Criando a div do toDo
+        const todoDiv = document.createElement('div');
+        todoDiv.classList.add('todo');
+    
+        //Criando  a li, informações do toDo
+        const newTodo = document.createElement('li');
+        newTodo.innerHTML = todo;
+        newTodo.classList.add('todo-item');
+        
+        //Todo Descriçao
+        const newTodoDescricao = document.createElement('p')
+        newTodoDescricao.innerHTML = todoDescricao.value
+        newTodoDescricao.classList.add('todo-descricao');
+        
+        //Todo Data
+        const newTodoData = document.createElement('p')
+        newTodoData.innerHTML = todoData.value
+        const newTodoDataFInal = document.createElement('p')
+        newTodoDataFInal.innerHTML = todoDataFinal.value
+        newTodoData.classList.add('todo-data');
+        newTodoDataFInal.classList.add('todo-data-final');
+        
+        // Adicionando ao HTML
+        todoDiv.appendChild(newTodo);
+        todoDiv.appendChild(newTodoDescricao);
+        todoDiv.appendChild(newTodoData);
+        todoDiv.appendChild(newTodoDataFInal);
+        
+        //Button checado
+        const completedButton =  document.createElement('button');
+        completedButton.innerText = 'OK'
+        completedButton.classList.add('complete-btn')
+        todoDiv.appendChild(completedButton);
+
+        //Button delete
+        const deleteButton =  document.createElement('button');
+        deleteButton.innerText = 'X'
+        deleteButton.classList.add('delete-btn')
+        todoDiv.appendChild(deleteButton);
+
+        //Populando html estático
+        todoList.appendChild(todoDiv);
+    }
+}
+
+function removeLocalTodo(todo){
+    let todos; 
+    if(localStorage.getItem('todos') === null){ 
+        todos = []; 
+    }else{
+        todos = JSON.parse(localStorage.getItem('todos'));
+    }  
+    const todoIndex = todo.children[0].innerText;
+    todos.splice(todos.indexOf(todoIndex), 1);
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+
+// Consumindo API
+
+function fetchDados(e) {
+    
+}
+
+

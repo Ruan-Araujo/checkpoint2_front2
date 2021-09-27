@@ -1,26 +1,41 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>To-do: lista de tarefas</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Todo List</title>
 </head>
 <body>
-    <form id="form">
-        <label>Título</label>
-        <input type="text" id="titulo">
-        <label>Descrição</label>
-        <input type="text" id="descricao">
-        <label>Prazo</label>
-        <input type="date" id="data">
-        <button id="btn-criar">Criar tarefa</button>
-        <button id="btn-cancelar">Cancelar</button>
-    </form>
-    <div class="container-card" >    
+    <div class="container">
+        <header>
+            <h1>Minhas tarefas</h1>
+        </header>
+
+        <form action="#" class="todo-input-pai">
+            <input type="text"  class="todo-input"  placeholder="Título">
+            <input type="text"  class="todo-input" id="todoDescricao" placeholder="Descrição">
+            <!-- <input type="date"  class="todo-input" id="todoData" placeholder="Data" disabled> -->
+            <input type="date" class="todo-input" id="todoDataFinal" placeholder="Data para finalizar">
+            <button class="todo-button" type="submit">+</button>
+        </form>
+
+       <!--  <div class="select">
+            <select name="todos" id="filter-todo">
+                <option value="todos">Todos</option>
+                <option value="completos">Completos</option>
+                <option value="incompletos">Incompletos</option>
+            </select>
+        </div> -->
+
+        <section class="todo-container">
+            <ul class="todo-list">
+            </ul>
+        </section>
     </div>
-    
-    <script src="js/app.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 </html>
