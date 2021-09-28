@@ -101,24 +101,6 @@ function deleteCheck(e){
 
 }
 
-/* // FIltro
-function filterTodo(e){
-    const todos = todoList.childNodes;
-    todos.forEach(function(todo) {
-        switch(e.target.value){
-            case 'todos':
-                todo.style.display = 'flex  '
-                break;
-            case 'completos':
-                if(todo.classList.contains('completed')){
-                    todo.style.display = 'flex'
-                }else{
-                    todo.style.display = 'none'
-                }
-        }
-    })
-} */
-
 // Salvar todos
 function salvarTodos(todo){
     let todos; // Primeiro verifica se já temos todos
@@ -196,12 +178,4 @@ function removeLocalTodo(todo){
     todos.splice(todos.indexOf(todoIndex), 1);
     localStorage.setItem('todos', JSON.stringify(todos));
 }
-
-
-// Consumindo API
-
-function fetchDados(e) {
-    
-}
-
 
