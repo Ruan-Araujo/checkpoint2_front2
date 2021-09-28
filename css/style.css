@@ -81,7 +81,8 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 10rem;
+    width: 12rem;
+    height: 8rem;
     max-width: 26rem;
     min-width: 200px;
     position: relative;
@@ -106,13 +107,18 @@ header {
     position: absolute;
     top: 0;
     left: 0;
-    background: greenyellow;
+    padding: .8rem;
+    background: #ad7fa8;
+    border: none;
+    font-size: 1rem;
 }
 .delete-btn{
     position: absolute;
     top: 0;
     right: 0;
-    background: red;
+    padding: .8rem;
+    background: #ad7fa8;
+    border: none;
 }
 
 .todo-data{

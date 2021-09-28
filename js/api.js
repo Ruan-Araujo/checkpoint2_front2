@@ -13,8 +13,8 @@ const criarCard = (userId,id,title,completed) => {
         <li class="todo-item">${id}</li>
         <p class="todo-descricao">${title}</p>
         <span>${userId}</span>
-        <button class="complete-btn">OK</button>
-        <button class="delete-btn">X</button>
+        <button class="complete-btn"><i class="fas fa-check"></i></button>
+        <button class="delete-btn"><i class="fas fa-trash-alt"></i></button>
     </div>
     `
     return card;

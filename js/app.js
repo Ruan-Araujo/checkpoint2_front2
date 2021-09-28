@@ -53,13 +53,13 @@ function addTodo(event) {
 
         //Button checado
         const completedButton =  document.createElement('button');
-        completedButton.innerText = 'OK'
+        completedButton.innerHTML = '<i class="fas fa-check"></i>'
         completedButton.classList.add('complete-btn')
         todoDiv.appendChild(completedButton);
 
         //Button delete
         const deleteButton =  document.createElement('button');
-        deleteButton.innerText = 'X'
+        deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>'
         deleteButton.classList.add('delete-btn')
         todoDiv.appendChild(deleteButton);
 
@@ -155,13 +155,13 @@ function getLocalTodo(todo){
         
         //Button checado
         const completedButton =  document.createElement('button');
-        completedButton.innerText = 'OK'
+        completedButton.innerHTML = '<i class="fas fa-check"></i>'
         completedButton.classList.add('complete-btn')
         todoDiv.appendChild(completedButton);
 
         //Button delete
         const deleteButton =  document.createElement('button');
-        deleteButton.innerText = 'X'
+        deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>'
         deleteButton.classList.add('delete-btn')
         todoDiv.appendChild(deleteButton);
 
