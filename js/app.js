@@ -4,7 +4,6 @@ const todoButton = document.querySelector('.todo-button')
 const todoContainer = document.querySelector('.todo-container');
 const todoList = document.querySelector('.todo-list');
 const todoDescricao = document.getElementById('todoDescricao')
-const todoData = document.getElementById('todoData')
 const todoDataFinal = document.getElementById('todoDataFinal')
 const todoTitulo = document.getElementById('todo-titulo');
 //Event Listeners
@@ -50,7 +49,7 @@ function addTodo(event) {
         todoDiv.appendChild(newTodoDataFInal);
 
         // Add todo ao LocalStorage
-        salvarTodos(todoInput.value, todoDescricao.value)
+        salvarTodos(todoInput.value)
 
         //Button checado
         const completedButton =  document.createElement('button');
@@ -141,7 +140,8 @@ function getLocalTodo(todo){
         
         //Todo Data
         const newTodoData = document.createElement('p')
-        newTodoData.innerHTML = todoData.value
+        let today = new Date(); 
+        newTodoData.innerHTML = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); 
         const newTodoDataFInal = document.createElement('p')
         newTodoDataFInal.innerHTML = todoDataFinal.value
         newTodoData.classList.add('todo-data');
