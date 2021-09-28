@@ -6,71 +6,74 @@ const todoList = document.querySelector('.todo-list');
 const todoDescricao = document.getElementById('todoDescricao')
 const todoData = document.getElementById('todoData')
 const todoDataFinal = document.getElementById('todoDataFinal')
-/* const filterOption = document.querySelector('.filter-todo'); */
-
+const todoTitulo = document.getElementById('todo-titulo');
 //Event Listeners
 document.addEventListener('DOMContentLoaded', getLocalTodo)
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener('click', deleteCheck);
 
-/* filterOption.addEventListener('click', filterTodo) */
 
 // Funções
 function addTodo(event) {
     // Previnindo o form de submeter
     event.preventDefault();
-    
-    // Criando a div do toDo
-    const todoDiv = document.createElement('div');
-    todoDiv.classList.add('todo');
-    
-    //Criando  a li, informações do toDo
-    // Todo Titulo
-    const newTodo = document.createElement('li');
-    newTodo.innerHTML = todoInput.value
-    newTodo.classList.add('todo-item');
-    
-    //Todo Descriçao
-    const newTodoDescricao = document.createElement('p')
-    newTodoDescricao.innerHTML = todoDescricao.value
-    newTodoDescricao.classList.add('todo-descricao');
-    
-    //Todo Data
-    const newTodoData = document.createElement('p')
-    let today = new Date(); 
-    newTodoData.innerHTML = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); 
-    const newTodoDataFInal = document.createElement('p')
-    newTodoDataFInal.innerHTML = todoDataFinal.value
-    newTodoData.classList.add('todo-data');
-    newTodoDataFInal.classList.add('todo-data-final');
-    
-    // Adicionando a DIV
-    todoDiv.appendChild(newTodo);
-    todoDiv.appendChild(newTodoDescricao);
-    todoDiv.appendChild(newTodoData);
-    todoDiv.appendChild(newTodoDataFInal);
-   
-    // Add todo ao LocalStorage
-    salvarTodos(todoInput.value, todoDescricao.value)
 
-    //Button checado
-    const completedButton =  document.createElement('button');
-    completedButton.innerText = 'OK'
-    completedButton.classList.add('complete-btn')
-    todoDiv.appendChild(completedButton);
+    if(todoTitulo.value != "" && todoDescricao.value != "" && todoDataFinal.value != "") {
+        // Criando a div do toDo
+        const todoDiv = document.createElement('div');
+        todoDiv.classList.add('todo');
 
-    //Button delete
-    const deleteButton =  document.createElement('button');
-    deleteButton.innerText = 'X'
-    deleteButton.classList.add('delete-btn')
-    todoDiv.appendChild(deleteButton);
+        //Criando  a li, informações do toDo
+        // Todo Titulo
+        const newTodo = document.createElement('li');
+        newTodo.innerHTML = todoInput.value
+        newTodo.classList.add('todo-item');
 
-    //Populando html estático - ul
-    todoList.appendChild(todoDiv);
+        //Todo Descriçao
+        const newTodoDescricao = document.createElement('p')
+        newTodoDescricao.innerHTML = todoDescricao.value
+        newTodoDescricao.classList.add('todo-descricao');
 
-    // Limpando o input
-    todoInput.value = "";
-    todoDescricao.value = '';
+        //Todo Data
+        const newTodoData = document.createElement('p')
+        let today = new Date(); 
+        newTodoData.innerHTML = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); 
+        const newTodoDataFInal = document.createElement('p')
+        newTodoDataFInal.innerHTML = todoDataFinal.value
+        newTodoData.classList.add('todo-data');
+        newTodoDataFInal.classList.add('todo-data-final');
+
+        // Adicionando a DIV
+        todoDiv.appendChild(newTodo);
+        todoDiv.appendChild(newTodoDescricao);
+        todoDiv.appendChild(newTodoData);
+        todoDiv.appendChild(newTodoDataFInal);
+
+        // Add todo ao LocalStorage
+        salvarTodos(todoInput.value, todoDescricao.value)
+
+        //Button checado
+        const completedButton =  document.createElement('button');
+        completedButton.innerText = 'OK'
+        completedButton.classList.add('complete-btn')
+        todoDiv.appendChild(completedButton);
+
+        //Button delete
+        const deleteButton =  document.createElement('button');
+        deleteButton.innerText = 'X'
+        deleteButton.classList.add('delete-btn')
+        todoDiv.appendChild(deleteButton);
+
+        //Populando html estático - ul
+        todoList.appendChild(todoDiv);
+
+        // Limpando o input
+        todoInput.value = "";
+        todoDescricao.value = '';
+    }else {
+        alert("Existem campos vazios!");
+    }
+    
 }
 
 // função para validar

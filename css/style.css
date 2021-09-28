@@ -44,11 +44,10 @@ header {
 .todo{
     display: flex;
     margin: 1rem;
-    padding: 2rem;
+    padding: 1.2rem;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 5rem;
     width: 5rem;
     max-width: 26rem;
     min-width: 200px;
@@ -104,7 +103,9 @@ header {
     text-decoration: line-through;
     opacity:  .5;
 }
-
+.not-completed {
+    font-weight: bold;
+}
 .fall{
     transform: translate(8rem) rotate(20deg);
     opacity: 0;
