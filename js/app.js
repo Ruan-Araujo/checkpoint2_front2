@@ -6,17 +6,18 @@ const todoList = document.querySelector('.todo-list');
 const todoDescricao = document.getElementById('todoDescricao')
 const todoDataFinal = document.getElementById('todoDataFinal')
 const todoTitulo = document.getElementById('todo-titulo');
+
 //Event Listeners
 document.addEventListener('DOMContentLoaded', getLocalTodo)
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener('click', deleteCheck);
 
-
 // Funções
-function addTodo(event) {
+function addTodo(event) { // Função para adicionar os cards
     // Previnindo o form de submeter
     event.preventDefault();
 
+    //Validação de campos
     if(todoTitulo.value != "" && todoDescricao.value != "" && todoDataFinal.value != "") {
         // Criando a div do toDo
         const todoDiv = document.createElement('div');
@@ -75,9 +76,6 @@ function addTodo(event) {
     
 }
 
-// função para validar
-
-
 // Função para deletar
 function deleteCheck(e){
     const item = e.target;
@@ -115,6 +113,7 @@ function salvarTodos(todo){
     localStorage.setItem('todos', JSON.stringify(todos));
 }
 
+// Função para pegar do local storage
 function getLocalTodo(todo){
     let todos; 
     if(localStorage.getItem('todos') === null){ 
@@ -170,6 +169,7 @@ function getLocalTodo(todo){
     }
 }
 
+// Função para remover do local storage
 function removeLocalTodo(todo){
     let todos; 
     if(localStorage.getItem('todos') === null){ 
